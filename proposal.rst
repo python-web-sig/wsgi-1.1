@@ -738,16 +738,22 @@ The semantics of each method are as documented in the Python Library
 Reference, except for these notes as listed in the table above:
 
 1. The server is not required to read past the client's specified
-   ``Content-Length``, and **should** simulate an end-of-file
-   condition if the application attempts to read past that point.
-   The application **should not** attempt to read more data than is
-   specified by the ``CONTENT_LENGTH`` variable.
+   ``Content-Length``, and **may** simulate an end-of-file
+   condition if the application attempts to read past that point. However, if
+   the server has reason to believe that more data exists, or if
+   ``Content-Length`` does not apply for this body (e.g. because the body uses
+   chunked transfer-encoding, or because it is a HTTP/1.0 request with no
+   content-length), the server **may** allow reads beyond ``Content-Length``.
 
    A server **should** allow ``read()`` to be called without an argument,
    and return the remainder of the client's input stream.
 
-   A server **should** return empty bytestrings from any attempt to
+   A server **must** return empty bytestrings from any attempt to
    read from an empty or exhausted input stream.
+
+   The consequence of these requirements is that an application may choose to
+   disregard the ``CONTENT_LENGTH`` variable, and instead read until the
+   end-of-file condition (returning an empty bytestring) is encountered.
 
 2. Servers **should** support the optional "size" argument to ``readline()``,
    but as in WSGI 1.0, they are allowed to omit support for it.
