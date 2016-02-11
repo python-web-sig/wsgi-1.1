@@ -726,7 +726,7 @@ the following methods:
 Method               Stream      Notes
 ===================  ==========  ========
 ``read(size)``       ``input``   1
-``readline()``       ``input``   1, 2
+``readline(size)``   ``input``   1, 2
 ``readlines(hint)``  ``input``   1, 3
 ``__iter__()``       ``input``
 ``flush()``          ``errors``  4
@@ -749,13 +749,7 @@ Reference, except for these notes as listed in the table above:
    A server **should** return empty bytestrings from any attempt to
    read from an empty or exhausted input stream.
 
-2. Servers **should** support the optional "size" argument to ``readline()``,
-   but as in WSGI 1.0, they are allowed to omit support for it.
-
-   (In WSGI 1.0, the size argument was not supported, on the grounds that
-   it might have been complex to implement, and was not often used in
-   practice...  but then the ``cgi`` module started using it, and so
-   practical servers had to start supporting it anyway!)
+2. Servers **must** support the optional "size" argument to ``readline()``.
 
 3. Note that the ``hint`` argument to ``readlines()`` is optional for
    both caller and implementer.  The application is free not to
