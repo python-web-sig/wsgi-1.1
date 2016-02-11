@@ -277,7 +277,7 @@ server.
         environ = {k: unicode_to_wsgi(v) for k,v in os.environ.items()}
         environ['wsgi.input']        = sys.stdin.buffer
         environ['wsgi.errors']       = sys.stderr
-        environ['wsgi.version']      = (1, 0)
+        environ['wsgi.version']      = (1, 1)
         environ['wsgi.multithread']  = False
         environ['wsgi.multiprocess'] = True
         environ['wsgi.run_once']     = True
@@ -649,8 +649,8 @@ and **must** contain the following WSGI-defined variables:
 =====================  ===============================================
 Variable               Value
 =====================  ===============================================
-``wsgi.version``       The tuple ``(1, 0)``, representing WSGI
-                       version 1.0.
+``wsgi.version``       The tuple ``(1, 1)``, representing WSGI
+                       version 1.1.
 
 ``wsgi.url_scheme``    A string representing the "scheme" portion of
                        the URL at which the application is being
