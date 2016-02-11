@@ -1,45 +1,28 @@
-PEP: 3333
-Title: Python Web Server Gateway Interface v1.0.1
+PEP: TBC
+Title: Python Web Server Gateway Interface v1.1.0
 Version: $Revision$
 Last-Modified: $Date$
-Author: P.J. Eby <pje@telecommunity.com>
+Author: Cory Benfield <cory@lukasa.co.uk>
+        P.J. Eby <pje@telecommunity.com>
 Discussions-To: Python Web-SIG <web-sig@python.org>
-Status: Final
+Status: Draft
 Type: Informational
 Content-Type: text/x-rst
-Created: 26-Sep-2010
-Post-History: 26-Sep-2010, 04-Oct-2010
-Replaces: 333
-
-
-Preface for Readers of PEP \333
-===============================
-
-This is an updated version of PEP 333, modified slightly to improve
-usability under Python 3, and to incorporate several long-standing
-de-facto amendments to the WSGI protocol.  (Its code samples have
-also been ported to Python 3.)
-
-While for procedural reasons [6]_, this must be a distinct PEP, no
-changes were made that invalidate previously-compliant servers or
-applications under Python 2.x.  If your 2.x application or server
-is compliant to PEP \333, it is also compliant with this PEP.
-
-Under Python 3, however, your app or server must also follow the
-rules outlined in the sections below titled, `A Note On String
-Types`_, and `Unicode Issues`_.
-
-For detailed, line-by-line diffs between this document and PEP \333,
-you may view its SVN revision history [7]_, from revision 84854 forward.
+Created: 11-Feb-2016
+Post-History: TBD
+Replaces: 3333
 
 
 Abstract
 ========
 
-This document specifies a proposed standard interface between web
-servers and Python web applications or frameworks, to promote web
-application portability across a variety of web servers.
+This document updates the standard interface between web servers and Python web
+applications or frameworks, the Web Server Gateway Interface (specified in
+PEP 3333), to iron out several common complains and limitations.
 
+Unlike the move from WSGI v1.0.0 to WSGI v1.0.1, this change is
+backward-incompatible: applications and servers that support *only* WSGI v1.1
+will not function correctly with WSGI v1.0 applications and servers.
 
 Original Rationale and Goals (from PEP \333)
 ============================================
