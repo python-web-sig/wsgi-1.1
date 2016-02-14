@@ -24,6 +24,12 @@ Unlike the move from WSGI v1.0.0 to WSGI v1.0.1, this change is
 backward-incompatible: applications and servers that support *only* WSGI v1.1
 will not function correctly with WSGI v1.0 applications and servers.
 
+Differences to PEP \3333
+========================
+
+* Minor editorial changes to the prose about chunking and content-length to
+  remove ambiguity.
+
 Original Rationale and Goals (from PEP \333)
 ============================================
 
@@ -929,7 +935,7 @@ by the iterable.
 And, if the server and client both support HTTP/1.1 "chunked
 encoding" [3]_, then the server **may** use chunked encoding to send
 a chunk for each ``write()`` call or bytestring yielded by the iterable,
-thus generating a ``Content-Length`` header for each chunk.  This
+by generating an appropriate chunk header for each chunk. This
 allows the server to keep the client connection alive, if it wishes
 to do so.  Note that the server **must** comply fully with RFC 2616
 when doing this, or else fall back to one of the other strategies for
