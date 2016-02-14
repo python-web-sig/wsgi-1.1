@@ -726,7 +726,7 @@ the following methods:
 Method               Stream      Notes
 ===================  ==========  ========
 ``read(size)``       ``input``   1
-``readline(size)``   ``input``   1, 2
+``readline(hint)``   ``input``   1, 2
 ``readlines(hint)``  ``input``   1, 3
 ``__iter__()``       ``input``
 ``flush()``          ``errors``  4
@@ -751,8 +751,8 @@ Reference, except for these notes as listed in the table above:
 
 2. Servers **must** support the optional "size" argument to ``readline()``.
 
-3. Note that the ``hint`` argument to ``readlines()`` is optional for
-   both caller and implementer.  The application is free not to
+3. Note that the ``hint`` argument to ``readline()`` and ``readlines()`` is
+   optional for both caller and implementer.  The application is free not to
    supply it, and the server or gateway is free to ignore it.
 
 4. Since the ``errors`` stream may not be rewound, servers and gateways
