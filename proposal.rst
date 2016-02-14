@@ -492,6 +492,12 @@ sections on `The start_response() Callable`_ and `Error Handling`_.
 It is used only when the application has trapped an error and is
 attempting to display an error message to the browser.
 
+The ``start_response`` callable **should** perform any header verification and
+checking that will take place before it returns (or raises an error), rather
+than deferring it until body bytes are supplied (either via an iterator or the
+``write`` callable). This ensures that exceptons are raised as close to the
+failing code as possible.
+
 The ``start_response`` callable must return a ``write(body_data)``
 callable that takes one positional parameter: a bytestring to be written
 as part of the HTTP response body.  (Note: the ``write()`` callable is
