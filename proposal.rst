@@ -799,7 +799,7 @@ The ``status`` argument is an HTTP "status" string like ``"200 OK"``
 or ``"404 Not Found"``.  That is, it is a string consisting of a
 Status-Code and a Reason-Phrase, in that order and separated by a
 single space, with no surrounding whitespace or other characters.
-(See RFC 2616, Section 6.1.1 for more information.)  The string
+(See RFC 7230, Section 3.1.2 for more information.)  The string
 **must not** contain control characters, and must not be terminated
 with a carriage return, linefeed, or combination thereof.
 
@@ -807,7 +807,7 @@ The ``response_headers`` argument is a list of ``(header_name,
 header_value)`` tuples.  It must be a Python list; i.e.
 ``type(response_headers) is ListType``, and the server **may** change
 its contents in any way it desires.  Each ``header_name`` must be a
-valid HTTP header field-name (as defined by RFC 2616, Section 4.2),
+valid HTTP header field-name (as defined by RFC 7230, Section 3.2),
 without a trailing colon or other punctuation.
 
 Each ``header_value`` **must not** include *any* control characters,
@@ -937,7 +937,7 @@ encoding" [3]_, then the server **may** use chunked encoding to send
 a chunk for each ``write()`` call or bytestring yielded by the iterable,
 by generating an appropriate chunk header for each chunk. This
 allows the server to keep the client connection alive, if it wishes
-to do so.  Note that the server **must** comply fully with RFC 2616
+to do so.  Note that the server **must** comply fully with RFC 7230
 when doing this, or else fall back to one of the other strategies for
 dealing with the absence of ``Content-Length``.
 
@@ -1084,7 +1084,7 @@ all strings passed to or from the server must be of type ``str`` or
 object where a string object is required, is undefined.
 
 Note also that strings passed to ``start_response()`` as a status or
-as response headers **must** follow RFC 2616 with respect to encoding.
+as response headers **must** follow RFC 7230 with respect to encoding.
 That is, they must either be ISO-8859-1 characters, or use RFC 2047
 MIME encoding.
 
@@ -1193,7 +1193,7 @@ may be done in any of several ways:
 Note that these behavior restrictions do not apply for HTTP 1.0
 requests, or for requests that are not directed to an application
 object.  For more information on HTTP 1.1 Expect/Continue, see RFC
-2616, sections 8.2.3 and 10.1.1.
+7231, sections 5.1.1 and 6.2.1.
 
 
 Other HTTP Features
@@ -1206,11 +1206,11 @@ response.  It is always possible for the application developer to add
 middleware components to supply additional features, so server/gateway
 developers should be conservative in their implementation.  In a sense,
 a server should consider itself to be like an HTTP "gateway server",
-with the application being an HTTP "origin server".  (See RFC 2616,
-section 1.3, for the definition of these terms.)
+with the application being an HTTP "origin server".  (See RFC 7230,
+section 2.1, for the definition of these terms.)
 
 However, because WSGI servers and applications do not communicate via
-HTTP, what RFC 2616 calls "hop-by-hop" headers do not apply to WSGI
+HTTP, what RFC 7230 calls "hop-by-hop" headers do not apply to WSGI
 internal communications.  WSGI applications **must not** generate any
 "hop-by-hop" headers [4]_, attempt to use HTTP features that would
 require them to generate such headers, or rely on the content of
@@ -1736,11 +1736,11 @@ References
 .. [2] The Common Gateway Interface Specification, v 1.1, 3rd Draft
    (http://ken.coar.org/cgi/draft-coar-cgi-v11-03.txt)
 
-.. [3] "Chunked Transfer Coding" -- HTTP/1.1, section 3.6.1
-   (http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.6.1)
+.. [3] "Chunked Transfer Coding" -- Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing, Section 4.1
+   (https://tools.ietf.org/html/rfc7230#section-4.1)
 
-.. [4] "End-to-end and Hop-by-hop Headers" -- HTTP/1.1, Section 13.5.1
-   (http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html#sec13.5.1)
+.. [4] "Connection" -- Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing, Section 6.1
+   (https://tools.ietf.org/html/rfc7230#section-6.1)
 
 .. [5] mod_ssl Reference, "Environment Variables"
    (http://www.modssl.org/docs/2.8/ssl_reference.html#ToC25)
