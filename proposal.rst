@@ -621,6 +621,14 @@ unless their value would be an empty string, in which case they
   server's response.  However, for compatibility with CGI we have to
   keep the existing name.)
 
+``REQUEST_URI``
+  The complete, un-normalized, raw request URI as provided by the user-agent.
+  This must be everything in the URI from the beginning of the path component
+  onwards. It must begin with a leading slash, and **may** contain only that
+  slash (if the root was requested). This field is new in WSGI 1.1, and so
+  applications must check for the WSGI version tuple before relying on this
+  field.
+
 ``HTTP_`` Variables
   Variables corresponding to the client-supplied HTTP request headers
   (i.e., variables whose names begin with ``"HTTP_"``).  The presence or
