@@ -1373,8 +1373,30 @@ to re-read it upon each invocation.)
 URL Reconstruction
 ------------------
 
-If an application wishes to reconstruct a request's complete URL, it
-may do so using the following algorithm, contributed by Ian Bicking::
+If an application wishes to reconstruct a request's complete URL when
+interoperating with a server using WSGI 1.1, it may do so using the following
+simple algorithm::
+
+    url = environ['wsgi.url_scheme']+'://'
+
+    if environ.get('HTTP_HOST'):
+        url += environ['HTTP_HOST']
+    else:
+        url += environ['SERVER_NAME']
+
+        if environ['wsgi.url_scheme'] == 'https':
+            if environ['SERVER_PORT'] != '443':
+               url += ':' + environ['SERVER_PORT']
+        else:
+            if environ['SERVER_PORT'] != '80':
+               url += ':' + environ['SERVER_PORT']
+
+    url += quote(environ.get('REQUEST_URI', '/'))
+
+If an application wishes to reconstruct a request's complete URL when
+interoperating with a server using an earlier version of WSGI, the application
+may do so with the somewhat more complex algorithm below, contributed by Ian
+Bicking::
 
     from urllib import quote
     url = environ['wsgi.url_scheme']+'://'
@@ -1400,6 +1422,12 @@ Note that such a reconstructed URL may not be precisely the same URI
 as requested by the client.  Server rewrite rules, for example, may
 have modified the client's originally requested URL to place it in a
 canonical form.
+
+Additionally, the variant used for versions of WSGI older than WSGI 1.1 may
+lead to a URL that is different to the one provided by the client, even if no
+server rewrite rules were in place. For example, the client may have quoted
+spaces differently than ``urllib.quote`` does. The WSGI 1.1 version using
+``REQUEST_URI`` avoids this problem.
 
 
 Supporting Older (<2.2) Versions of Python
