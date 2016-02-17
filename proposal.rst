@@ -627,7 +627,8 @@ unless their value would be an empty string, in which case they
   onwards. It must begin with a leading slash, and **may** contain only that
   slash (if the root was requested). This field is new in WSGI 1.1, and so
   applications must check for the WSGI version tuple before relying on this
-  field.
+  field. This field **must** be a native string, as defined in
+  `A Note On String Types`_.
 
 ``HTTP_`` Variables
   Variables corresponding to the client-supplied HTTP request headers
