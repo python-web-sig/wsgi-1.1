@@ -1401,11 +1401,11 @@ WSGI versions 1.0.0 and 1.0.1 supported a wide range of Python versions that
 are no longer receiving security fixes. WSGI 1.1 no longer supports those
 versions of Python.
 
-WSGI 1.1 does not support any version of Python that is no longer receiving
-security patches from the CPython development team. WSGI 1.1 applications and
-servers **may**, at their own discretion, continue to support those versions of
-Python: however, they **must not** deviate from this specification in any way
-to do so.
+WSGI 1.1 applications and servers are not required to provide support for any
+version of Python that is not receiving security fixes from the CPython
+development team. WSGI 1.1 applications and servers **may**, at their own
+discretion, continue to support those versions of Python: however, they
+**must not** deviate from this specification in any way to do so.
 
 
 Optional Platform-Specific File Handling
