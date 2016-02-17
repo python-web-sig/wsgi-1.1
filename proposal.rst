@@ -1378,7 +1378,7 @@ If an application wishes to reconstruct a request's complete URL when
 interoperating with a server using WSGI 1.1, it may do so using the following
 simple algorithm::
 
-    url = environ['wsgi.url_scheme']+'://'
+    url = environ['wsgi.url_scheme'] + '://'
 
     if environ.get('HTTP_HOST'):
         url += environ['HTTP_HOST']
@@ -1400,7 +1400,7 @@ may do so with the somewhat more complex algorithm below, contributed by Ian
 Bicking::
 
     from urllib import quote
-    url = environ['wsgi.url_scheme']+'://'
+    url = environ['wsgi.url_scheme'] + '://'
 
     if environ.get('HTTP_HOST'):
         url += environ['HTTP_HOST']
