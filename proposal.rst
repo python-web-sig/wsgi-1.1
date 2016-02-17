@@ -1242,6 +1242,23 @@ components, thus freeing both server and application authors from
 implementing the same features over and over again.
 
 
+HTTP/2 Features
+---------------
+
+From the perspective of WSGI applications and servers, HTTP/2 is not handled
+differently from HTTP/1.1. Because the semantics of HTTP/2 requests and
+responses are identical to the semantics of HTTP/1.1 requests and responses,
+there is no requirement for servers to treat them differently in WSGI.
+
+Servers that support both HTTP/1.1 and HTTP/2 **may** provide support for
+applications to request HTTP/2 Server Push [8]_ using the "preload" tag in Link
+headers. This is discussed in more depth in the W3C's Preload draft [9]_.
+
+Applications **may** always send a preload Link header, regardless of whether
+the server supports HTTP/2 Server Push: there are no adverse affects if that
+header reaches the user-agent.
+
+
 Thread Support
 --------------
 
@@ -1750,6 +1767,12 @@ References
 
 .. [7] SVN revision history for PEP \3333, showing differences from PEP 333
    (http://svn.python.org/view/peps/trunk/pep-3333.txt?r1=84854&r2=HEAD)
+
+.. [8] "Server Push" -- Hypertext Transfer Protocol Version 2 (HTTP/2), Section 8.2
+   (https://tools.ietf.org/html/rfc7540#section-8.2)
+
+.. [9] "Server Push (HTTP/2)" -- Preload, W3C Editor's Draft, Section 2.3
+   (https://w3c.github.io/preload/#server-push-http-2)
 
 Copyright
 =========
